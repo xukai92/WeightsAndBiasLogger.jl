@@ -13,7 +13,7 @@
 ## Installation
 
 - From REPL: `] add https://github.com/xukai92/WeightsAndBiasLogger.jl`
-- By code: `using Pkg; Pkg.add("https://github.com/xukai92/WeightsAndBiasLogger.jl")`
+- By code: `using Pkg; pkg"add https://github.com/xukai92/WeightsAndBiasLogger.jl"`
 
 ## Example
 
