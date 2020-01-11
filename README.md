@@ -1,5 +1,5 @@
 # WeightsAndBiasLogger.jl
-Log to W&amp;B from Julia
+Log to [W&B](https://app.wandb.ai/) from Julia
 
 ## Prerequisite
 1. Install W&B and set it up following [here](https://docs.wandb.com/quickstart)
