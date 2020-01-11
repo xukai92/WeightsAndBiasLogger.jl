@@ -3,7 +3,7 @@ Log to W&amp;B from Julia
 
 ## Prerequisite
 1. Install W&B and set it up following [here](https://docs.wandb.com/quickstart)
-2. Install [PyCall.jl](https://github.com/JuliaPy/PyCall.jl) and 
+2. Install [PyCall.jl](https://github.com/JuliaPy/PyCall.jl) 
 3. Make sure PyCall is configured to use the same Python env as W&B is installed
     - https://github.com/JuliaPy/PyCall.jl#specifying-the-python-version
 
