@@ -1,17 +1,17 @@
 # WeightsAndBiasLogger.jl
 Log to W&amp;B from Julia
 
-**Prerequisite**
+## Prerequisite
 1. Install W&B and set it up following [here](https://docs.wandb.com/quickstart)
 2. Install [PyCall.jl](https://github.com/JuliaPy/PyCall.jl) and 
 3. Make sure PyCall is configured to use the same Python env as W&B is installed
-  - https://github.com/JuliaPy/PyCall.jl#specifying-the-python-version
+    - https://github.com/JuliaPy/PyCall.jl#specifying-the-python-version
 
-**Installation**
+## Installation
 - From REPL: `] add https://github.com/xukai92/WeightsAndBiasLogger.jl`
 - By code: `using Pkg; Pkg.add("https://github.com/xukai92/WeightsAndBiasLogger.jl")`
 
-**Usage**
+## Example
 ```julia
 using Logging, WeightsAndBiasLogger
 
