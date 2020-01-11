@@ -5,3 +5,9 @@ version = "0.1.0"
 
 [deps]
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+
+[extras]
+LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+
+[targets]
+test = ["Test"]
