@@ -17,15 +17,23 @@ module WeightsAndBiasLogger
         return WBLogger(min_level)
     end
 
-    function string_dict(dict::Union{Dict,NamedTuple})
-        return Dict(string(k) => dict[k] for k in keys(dict))
+    function string_dict(prefix, config::Union{Dict,NamedTuple})
+        prefix_with_delimiter = prefix == "" ? "" : "$prefix/"
+        return Dict(prefix_with_delimiter * string(k) => config[k] for k in keys(config))
     end
 
-    string_dict(dict::Dict{String,<:Any}) = dict
+    string_dict(config) = string_dict("", config)
 
-    string_dict(pairs::Iterators.Pairs) = string_dict(Dict(pairs...))
+    string_dict(config::Union{Dict,NamedTuple}; prefix="") = string_dict(prefix, config)
+
+    string_dict(pairs::Iterators.Pairs; prefix="") = string_dict(preifx, Dict(pairs...))
 
     config!(wblogger::WBLogger, config) = wandb.config.update(string_dict(config))
+
+    function config!(wblogger::WBLogger, pair::Pair)
+        name, config = pair
+        config!(wblogger, string_dict(config; prefix=name))
+    end
 
     # AbstractLogger interface
 
