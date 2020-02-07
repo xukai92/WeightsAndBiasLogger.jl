@@ -16,6 +16,9 @@ env:
   matrix:
     - PYTHON=python3
 
+install:
+  - pip install wandb
+
 matrix:
   allow_failures:
     - julia: nightly
