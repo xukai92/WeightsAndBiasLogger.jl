@@ -22,7 +22,8 @@ addons:
       - python3-pip
 
 install:
-  - pip3 install setuptools wandb
+  - pip3 install --upgrade pip
+  - pip3 install wandb
 
 matrix:
   allow_failures:
