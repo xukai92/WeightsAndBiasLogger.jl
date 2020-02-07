@@ -17,7 +17,7 @@ env:
     - PYTHON=python3
 
 install:
-  - pip install wandb
+  - pip3 install wandb
 
 matrix:
   allow_failures:
