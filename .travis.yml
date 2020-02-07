@@ -16,8 +16,14 @@ env:
   matrix:
     - PYTHON=python3
 
+addons:
+  apt:
+    packages:
+      - python3-pip
+
 install:
-  - python3 -m pip install wandb
+  - python -m pip install --upgrade pip
+  - python -m pip install wandb
 
 matrix:
   allow_failures:
