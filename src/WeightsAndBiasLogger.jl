@@ -28,10 +28,9 @@ module WeightsAndBiasLogger
 
     string_dict(pairs::Iterators.Pairs; prefix="") = string_dict(preifx, Dict(pairs...))
 
-    config!(wblogger::WBLogger, config; kwargs...) = wandb.config.update("" => config; kwargs...)
-
-    function config!(wblogger::WBLogger, pair::Pair; ignores=[])
-        name, config = pair
+    config!(wblogger::WBLogger, pair::Pair; kwargs...) = config!(wblogger, pair...; kwargs...)
+    config!(wblogger::WBLogger, config; kwargs...) = config!(wblogger, "", config; kwargs...)
+    function config!(wblogger::WBLogger, name::String, config; ignores=[])
         config_ignored = filter(p -> string(p.first) in string.(ignores), config)
         config!(wblogger, string_dict(config_ignored; prefix=name))
     end
