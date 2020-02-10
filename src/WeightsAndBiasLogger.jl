@@ -17,22 +17,22 @@ module WeightsAndBiasLogger
         return WBLogger(min_level)
     end
 
-    function string_dict(prefix, config::Union{Dict,NamedTuple})
-        prefix_with_delimiter = prefix == "" ? "" : "$prefix/"
-        return Dict(prefix_with_delimiter * string(k) => config[k] for k in keys(config))
+    function string_dict(prefix, dict, ignores)
+        ignores = string.(ignores)
+        # Make string dict
+        dict = Dict(string(k) => dict[k] for k in keys(dict))
+        # Ignore some keys
+        dict = filter(p -> !(string(p.first) in ignores), dict)
+        # Add prefix
+        dict = Dict(prefix * k => dict[k] for k in keys(dict))
+        return dict
     end
 
-    string_dict(config) = string_dict("", config)
-
-    string_dict(config::Union{Dict,NamedTuple}; prefix="") = string_dict(prefix, config)
-
-    string_dict(pairs::Iterators.Pairs; prefix="") = string_dict(preifx, Dict(pairs...))
-
     config!(wblogger::WBLogger, pair::Pair; kwargs...) = config!(wblogger, pair...; kwargs...)
-    config!(wblogger::WBLogger, config; kwargs...) = config!(wblogger, "", config; kwargs...)
-    function config!(wblogger::WBLogger, name::String, config; ignores=[])
-        config_ignored = filter(p -> string(p.first) in string.(ignores), config)
-        config!(wblogger, string_dict(config_ignored; prefix=name))
+    config!(wblogger::WBLogger, cfg; kwargs...) = config!(wblogger, "", cfg; kwargs...)
+    function config!(wblogger::WBLogger, name::String, cfg; ignores=[])
+        prefix = name == "" ? "" : "$name/"
+        config!(wblogger, string_dict(prefix, cfg, ignores))
     end
 
     # AbstractLogger interface
