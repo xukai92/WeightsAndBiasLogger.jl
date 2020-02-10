@@ -28,7 +28,7 @@ module WeightsAndBiasLogger
 
     string_dict(pairs::Iterators.Pairs; prefix="") = string_dict(preifx, Dict(pairs...))
 
-    config!(wblogger::WBLogger, config) = wandb.config.update(string_dict(config))
+    config!(wblogger::WBLogger, config) = wandb.config.update("" => config)
 
     function config!(wblogger::WBLogger, pair::Pair; ignores=[])
         name, config = pair
