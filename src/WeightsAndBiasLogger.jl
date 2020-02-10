@@ -17,10 +17,10 @@ module WeightsAndBiasLogger
         return WBLogger(min_level)
     end
 
-    function string_dict(prefix, dict, ignores)
+    function string_dict(prefix, cfg, ignores)
         ignores = string.(ignores)
         # Make string dict
-        dict = Dict(string(k) => dict[k] for k in keys(dict))
+        dict = Dict(string(k) => cfg[k] for k in keys(cfg))
         # Ignore some keys
         dict = filter(p -> !(string(p.first) in ignores), dict)
         # Add prefix
@@ -32,7 +32,7 @@ module WeightsAndBiasLogger
     config!(wblogger::WBLogger, cfg; kwargs...) = config!(wblogger, "", cfg; kwargs...)
     function config!(wblogger::WBLogger, name::String, cfg; ignores=[])
         prefix = name == "" ? "" : "$name/"
-        config!(wblogger, string_dict(prefix, cfg, ignores))
+        wandb.config.update(string_dict(prefix, cfg, ignores))
     end
 
     # AbstractLogger interface
