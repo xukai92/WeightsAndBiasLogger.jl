@@ -3,10 +3,9 @@ using Test
 @testset "Utilities" begin
     using WeightsAndBiasLogger: string_dict
 
-    for info in [
-        (x=1, y="x"),
-        Dict(:x => 1, :y => "x"),
-    ]
-        @test string_dict(info) isa Dict{String,Any}
-    end
+    test1 = (x=1, y="x")
+    @test string_dict("", test1, []) == Dict("x" => 1, "y" => "x")
+    @test string_dict("m1", test1, []) == Dict("m1/x" => 1, "m1/y" => "x")
+    test2 = Dict(:x => 1, :y => "x")
+    @test string_dict("", test2, [:y]) == Dict("x" => 1)
 end
