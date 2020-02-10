@@ -30,9 +30,10 @@ module WeightsAndBiasLogger
 
     config!(wblogger::WBLogger, config) = wandb.config.update(string_dict(config))
 
-    function config!(wblogger::WBLogger, pair::Pair)
+    function config!(wblogger::WBLogger, pair::Pair; ignores=[])
         name, config = pair
-        config!(wblogger, string_dict(config; prefix=name))
+        config_ignored = filter(p -> string(p.first) in string.(ignores), config)
+        config!(wblogger, string_dict(config_ignored; prefix=name))
     end
 
     # AbstractLogger interface
