@@ -28,7 +28,7 @@ module WeightsAndBiasLogger
         return dict
     end
 
-    config!(wblogger::WBLogger, pair::Pair; kwargs...) = config!(wblogger, pair...; kwargs...)
+    config!(wblogger::WBLogger, p::Pair; kwargs...) = config!(wblogger, p.first, p.second; kwargs...)
     config!(wblogger::WBLogger, cfg; kwargs...) = config!(wblogger, "", cfg; kwargs...)
     function config!(wblogger::WBLogger, name::String, cfg; ignores=[])
         prefix = name == "" ? "" : "$name/"
