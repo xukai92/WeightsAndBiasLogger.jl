@@ -6,7 +6,7 @@ module WeightsAndBiasLogger
         copy!(wandb, pyimport("wandb"))
     end
 
-    using Base.CoreLogging: CoreLogging, AbstractLogger, LogLevel, Info, handle_message, shouldlog, min_enabled_level, catch_exceptions
+    using Base.CoreLogging: CoreLogging, AbstractLogger, LogLevel, Info, handle_message, shouldlog, min_enabled_level, catch_exceptions, with_logger
 
     mutable struct WBLogger <: AbstractLogger
         min_level::LogLevel
@@ -48,5 +48,9 @@ module WeightsAndBiasLogger
         wandb.log(info_dict, commit=commit)
     end
 
-    export wandb, WBLogger, config!
+    # Utilites
+
+    with(f::Function, lg::AbstractLogger) = with_logger(f, lg)
+
+    export wandb, WBLogger, config!, with
 end # module
