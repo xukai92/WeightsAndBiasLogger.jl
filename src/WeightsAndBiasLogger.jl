@@ -44,7 +44,8 @@ module WeightsAndBiasLogger
     CoreLogging.shouldlog(lg::WBLogger, level, _module, group, id) = true
 
     function CoreLogging.handle_message(lg::WBLogger, level, message, _module, group, id, file, line; commit=true, kwargs...)
-        info_dict = Dict("$message/$k" => kwargs[k] for k in keys(kwargs))
+        prefix = message == "" ? "" : "/"
+        info_dict = Dict("$prefix/$k" => kwargs[k] for k in keys(kwargs))
         wandb.log(info_dict, commit=commit)
     end
 
