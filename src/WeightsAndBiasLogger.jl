@@ -41,8 +41,8 @@ module WeightsAndBiasLogger
 
     ### Preprocessing
 
-    preprocess(wblogger, x) = x
-    # preprocess(wblogger, x::Figure) = wandb.Image(x)  # FIXME: this cause premission error
+    preprocess(lg, x) = x
+    preprocess(wblogger::WBLogger, x::Figure) = wblogger.force_pyplot ? wandb.Image(x) : x
 
     ### AbstractLogger interface
 
