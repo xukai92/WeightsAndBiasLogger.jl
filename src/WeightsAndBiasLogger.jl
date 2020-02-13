@@ -1,5 +1,6 @@
 module WeightsAndBiasLogger
     using PyCall
+    using PyPlot: Figure
     const wandb = PyNULL()
 
     function __init__()
@@ -10,11 +11,12 @@ module WeightsAndBiasLogger
 
     mutable struct WBLogger <: AbstractLogger
         min_level::LogLevel
+        force_pyplot::Bool
     end
 
-    function WBLogger(; min_level::LogLevel=Info, reinit=true, init_args...)
+    function WBLogger(; min_level::LogLevel=Info, reinit=true, force_pyplot=true, init_args...)
         wandb.init(; reinit=reinit, init_args...)
-        return WBLogger(min_level)
+        return WBLogger(min_level, force_pyplot)
     end
 
     function string_dict(prefix, cfg, ignores)
@@ -35,6 +37,13 @@ module WeightsAndBiasLogger
         wandb.config.update(string_dict(prefix, cfg, ignores))
     end
 
+    function preprocess(wblogger, x)
+        if wblogger.force_pyplot && x isa Figure
+            return wandb.Image(x)
+        end
+        return x
+    end
+
     # AbstractLogger interface
 
     CoreLogging.catch_exceptions(lg::WBLogger) = false
@@ -45,7 +54,7 @@ module WeightsAndBiasLogger
 
     function CoreLogging.handle_message(lg::WBLogger, level, message, _module, group, id, file, line; commit=true, kwargs...)
         prefix = message == "" ? "" : "/"
-        info_dict = Dict("$prefix/$k" => kwargs[k] for k in keys(kwargs))
+        info_dict = Dict("$prefix/$k" => preprocess(lg, kwargs[k]) for k in keys(kwargs))
         wandb.log(info_dict, commit=commit)
     end
 
