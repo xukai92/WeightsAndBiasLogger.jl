@@ -9,6 +9,8 @@ module WeightsAndBiasLogger
 
     using Base.CoreLogging: CoreLogging, AbstractLogger, LogLevel, Info, handle_message, shouldlog, min_enabled_level, catch_exceptions, with_logger
 
+    ### WBLogger
+
     mutable struct WBLogger <: AbstractLogger
         min_level::LogLevel
         force_pyplot::Bool
@@ -37,14 +39,12 @@ module WeightsAndBiasLogger
         wandb.config.update(string_dict(prefix, cfg, ignores))
     end
 
-    function preprocess(wblogger, x)
-        if wblogger.force_pyplot && x isa Figure
-            return wandb.Image(x)
-        end
-        return x
-    end
+    ### Preprocessing
 
-    # AbstractLogger interface
+    preprocess(wblogger, x) = x
+    # preprocess(wblogger, x::Figure) = wandb.Image(x)  # FIXME: this cause premission error
+
+    ### AbstractLogger interface
 
     CoreLogging.catch_exceptions(lg::WBLogger) = false
 
