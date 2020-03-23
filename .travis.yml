@@ -12,18 +12,6 @@ julia:
   - 1.3
   - nightly
 
-env:
-  matrix:
-    - PYTHON=python3
-
-addons:
-  apt:
-    packages:
-      - python3-pip
-
-install:
-  - pip3 install wandb
-
 matrix:
   allow_failures:
     - julia: nightly
