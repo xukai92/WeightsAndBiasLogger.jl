@@ -13,6 +13,7 @@ notifications:
     email: false
 script: 
     - julia -e 'using Pkg; Pkg.build(; verbose=true)'
+    # echo 3 is to select "(3) Don't visualize my results" for W&B
     - echo 3 | julia -e 'using Pkg; Pkg.test(coverage=true)'
 after_success:
     - julia -e 'using Pkg; Pkg.add("Coverage")'
