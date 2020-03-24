@@ -1,16 +1,16 @@
 language: julia
 os:
-	- linux
-	- osx
+    - linux
+    - osx
 julia:
-	- 1.3
-	- nightly
+    - 1.3
+    - nightly
 matrix:
-	allow_failures:
-		- julia: nightly
-	fast_finish: true
+    allow_failures:
+        - julia: nightly
+    fast_finish: true
 notifications:
-	email: false
+    email: false
 after_success:
-	- julia -e 'using Pkg; Pkg.add("Coverage")'
-	- julia -e 'using Coverage; Codecov.submit(process_folder())'
+    - julia -e 'using Pkg; Pkg.add("Coverage")'
+    - julia -e 'using Coverage; Codecov.submit(process_folder())'
