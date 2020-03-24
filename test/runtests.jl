@@ -13,6 +13,8 @@ end
 @testset "Demo" begin
     using Logging, WeightsAndBiasLogger
 
+    withenv("WANDB_MODE" => "dryrun") do
+
     logger = WBLogger(project="sample-project")
 
     args = (n_epochs=1_000, lr=1e-3)
@@ -26,4 +28,6 @@ end
             @info "train" i=i loss=loss
         end
     end
+    
+    end # withenv
 end
