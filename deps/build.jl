@@ -1,6 +1,6 @@
 import Conda
-Conda.add("pip")
 ENVPATH = Conda.ROOTENV
+Conda.add("pip")
 PIP = joinpath(ENVPATH, "bin/pip")
 run(`$PIP install wandb matplotlib`)
 
