@@ -1,7 +1,7 @@
 name = "WeightsAndBiasLogger"
 uuid = "71805093-c1fc-4af5-8d0a-8dde53c6ac46"
 authors = ["Kai Xu <xukai921110@gmail.com>"]
-version = "0.3.1"
+version = "0.4.0"
 
 [deps]
 Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
@@ -10,7 +10,9 @@ PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
 
 [compat]
-PyCall = "1.0, 2"
+PyCall = "1.0, 2.0"
+PyPlot = "2.0"
+Conda = "1.0"
 julia = "0.7, 1.0"
 
 [extras]
