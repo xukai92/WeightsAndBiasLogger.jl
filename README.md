@@ -6,8 +6,8 @@
 
 ## Installation
 
-- From REPL: `] add https://github.com/xukai92/WeightsAndBiasLogger.jl`
-- By code: `using Pkg; pkg"add https://github.com/xukai92/WeightsAndBiasLogger.jl"`
+- From REPL: `] add WeightsAndBiasLogger`
+- By code: `using Pkg; pkg"add WeightsAndBiasLogger"`
 
 ## Demo
 
