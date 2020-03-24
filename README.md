@@ -1,6 +1,6 @@
 # WeightsAndBiasLogger.jl
 
-[![Build Status](https://travis-ci.org/xukai92/WeightsAndBiasLogger.jl.svg?branch=master)](https://travis-ci.org/xukai92/WeightsAndBiasLogger.jl)
+![Test](https://github.com/xukai92/WeightsAndBiasLogger.jl/workflows/Test/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/xukai92/WeightsAndBiasLogger.jl/badge.svg?branch=master)](https://coveralls.io/github/xukai92/WeightsAndBiasLogger.jl?branch=master)
 
 ## Installation
