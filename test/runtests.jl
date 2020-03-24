@@ -10,4 +10,4 @@ using Test
     @test string_dict("", test2; ignores=[:y]) == Dict("x" => 1)
 end
 
-@testset "Demo" include("demo.jl")
+@testset "Demo" begin include("demo.jl") end
