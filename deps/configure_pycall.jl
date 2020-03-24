@@ -1,4 +1,4 @@
-using PyCall, Pkg
+import PyCall, Pkg
 
 pip = joinpath(split(PyCall.PYTHONHOME, ":")[end], "bin/pip")
 
