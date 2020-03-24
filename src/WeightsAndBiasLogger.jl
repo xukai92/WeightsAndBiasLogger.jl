@@ -21,23 +21,22 @@ module WeightsAndBiasLogger
         return WBLogger(min_level, force_pyplot)
     end
 
-    function string_dict(prefix, cfg, ignores)
+    function string_dict(prefix, cfg; ignores=[], delimiter="/")
         ignores = string.(ignores)
         # Make string dict
         dict = Dict(string(k) => cfg[k] for k in keys(cfg))
         # Ignore some keys
         dict = filter(p -> !(string(p.first) in ignores), dict)
         # Add prefix
+        prefix = prefix == "" ? "" : "$prefix$delimiter"
         dict = Dict(prefix * k => dict[k] for k in keys(dict))
         return dict
     end
 
     config!(wblogger::WBLogger, p::Pair; kwargs...) = config!(wblogger, p.first, p.second; kwargs...)
     config!(wblogger::WBLogger, cfg; kwargs...) = config!(wblogger, "", cfg; kwargs...)
-    function config!(wblogger::WBLogger, name::String, cfg; ignores=[])
-        prefix = name == "" ? "" : "$name/"
-        wandb.config.update(string_dict(prefix, cfg, ignores))
-    end
+    config!(wblogger::WBLogger, name::String, cfg; kwargs...) = 
+        wandb.config.update(string_dict(name, cfg; kwargs...))
 
     ### Preprocessing
 
