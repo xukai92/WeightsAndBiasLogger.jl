@@ -19,7 +19,7 @@ end
 
     config!(logger, args)
 
-    with_logger(logger) do
+    with(logger) do
         loss = 0
         for i in 1:args.n_epochs
             loss += randn()
