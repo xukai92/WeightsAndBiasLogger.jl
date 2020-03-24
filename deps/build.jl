@@ -2,9 +2,7 @@ using PyCall, Conda, Pkg
 
 getpip() = joinpath(split(PyCall.PYTHONHOME, ":")[end], "bin/pip")
 
-try
-    run(`$(getpip()) list`)
-catch
+if !isfile(getpip())
     println("`pip` is not available in the current PyCall.jl")
     println("Configuring PyCall.jl to use Conda.jl")
     ENV["PYTHON"] = joinpath(Conda.PYTHONDIR, "bin/python")
