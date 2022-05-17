@@ -2,7 +2,7 @@ run(`julia configure_pycall.jl`)
 
 using PyCall
 
-const PIP = joinpath(split(PyCall.PYTHONHOME, ":")[end], "bin/pip")
+include("set_pip.jl")
 
 function pipinstall(pkg)
     try

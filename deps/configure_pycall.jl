@@ -1,8 +1,8 @@
 import PyCall, Pkg
 
-pip = joinpath(split(PyCall.PYTHONHOME, ":")[end], "bin/pip")
+include("set_pip.jl")
 
-if !isfile(pip)
+if !isfile(PIP)
     println("`pip` is not available in the current PyCall.jl")
     println("Configuring PyCall.jl to use Conda.jl")
     ENV["PYTHON"] = ""
